@@ -73,10 +73,9 @@ class Library {
 	}
 	
 	public void printBookByISBN(List<Book> bookList) {
-		int i = 1;
 		for (Book book : bookList) {
 			System.out.println("Book " + "\"" + book.getTitle() + "\" borrowed successfully");			
-			i++;
+			
 	   }
 	}
 	
