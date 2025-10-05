@@ -10,16 +10,15 @@ public class Main {
 	public static void libraryMenu(int userChoose, Library library, Person person, Scanner scanner) {
 
 		
-		while (userChoose < 1 || userChoose > 4) {
+		while (userChoose < 1 || userChoose > 7) {
 			
-			if (userChoose < 1 || userChoose > 4) {
+			if (userChoose < 1 || userChoose > 7) {
 				System.out.println("Wrong number selected!");
 				System.out.print("Enter your choice(1-4): ");
 				userChoose = scanner.nextInt();
 				System.out.println("");
 			}
 		}
-		
 		
 		switch (userChoose) {
 		case 1:
@@ -91,32 +90,30 @@ public class Main {
 		
 		
 		
-		
-		System.out.println();
-		System.out.println("Welcome to the Library!");
-		System.out.println("------------------------");
-		System.out.println("");
-		System.out.println("1. View all books");
-		System.out.println("2. View available books");
-		System.out.println("3. View borrowed books");
-		System.out.println("4. Borrow a book");
-		System.out.println("5. Return a book");
-		System.out.println("6. View my borrowd books");
-		System.out.println();
-		
-		
-
-		
-		//Read user input
-        
+		int userChoose;
 		Scanner scanner =  new Scanner(System.in);
-		System.out.print("Enter your choice: ");
-	    int userChoose = scanner.nextInt();
-		System.out.println("");
-
-		libraryMenu(userChoose, library, person, scanner);
+		do {
+			System.out.println();
+			System.out.println("Welcome to the Library!");
+			System.out.println("");
+			System.out.println("1. View all books");
+			System.out.println("2. View available books");
+			System.out.println("3. View borrowed books");
+			System.out.println("4. Borrow a book");
+			System.out.println("5. Return a book");
+			System.out.println("6. View my borrowd books");
+			System.out.println("7. Exit");
+			System.out.println();	
 		
-		scanner.close();
+			//Read user input			
+			System.out.print("Enter your choice: ");
+			userChoose = scanner.nextInt();
+			System.out.println("");
+			libraryMenu(userChoose, library, person, scanner);
+			} while (userChoose != 7);
+
+			
+			scanner.close();
 
     }
 }
