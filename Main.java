@@ -4,61 +4,24 @@ import java.util.Scanner;
 
 public class Main {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		//ArrayList<Book> books = new ArrayList<>();
-		Library library = new Library();
-		Person person = new Person(0, null);
-		
-		library.addBook(new Book("Go Your Way", "Emmanuel Dotse", 123456789L, true));
-		library.addBook(new Book("Shadows of Tomorrow", "Amelia Clark", 987654321L, true));
-		library.addBook(new Book("The Last Horizon", "Daniel Stone", 192837465L, false));
-		library.addBook(new Book("Code of Silence", "Sophia Turner", 564738291L, true));
-		library.addBook(new Book("Dreamcatcher’s Path", "Michael Rivers", 837261945L, true));
-		library.addBook(new Book("Echoes in Time", "Isabella Hughes", 374829105L, false));
-		library.addBook(new Book("The Hidden Truth", "David Johnson", 918273645L, true));
-		library.addBook(new Book("Beyond the Stars", "Olivia Carter", 746382910L, true));
-		library.addBook(new Book("Winds of Change", "James Bennett", 1029384756L, false));
-		library.addBook(new Book("Whispers in the Dark", "Emma Wilson", 5647382910L, true));
-		library.addBook(new Book("Action alleviates Anxiety", "Emmanuel Dotse", 123489789L, true));
-		
-		
-		
-		
-		System.out.println();
-		System.out.println("Welcome to the Library!");
-		System.out.println("------------------------");
-		System.out.println("");
-		System.out.println("1. View all books");
-		System.out.println("2. View available books");
-		System.out.println("3. View borrowed books");
-		System.out.println("4. Borrow a book");
-		System.out.println("5. Return a book");
-		System.out.println("6. View my borrowd books");
-		System.out.println();
-		
-		
+
+
+
+	public static void libraryMenu(int userChoose, Library library, Person person, Scanner scanner) {
 
 		
-		//Read user input
-		int userChoice;
-		Scanner scanner =  new Scanner(System.in);
-		System.out.print("Enter your choice: ");
-		userChoice = scanner.nextInt();
-		System.out.println("");
-		
-		while (userChoice < 1 || userChoice > 4) {
+		while (userChoose < 1 || userChoose > 4) {
 			
-			if (userChoice < 1 || userChoice > 4) {
+			if (userChoose < 1 || userChoose > 4) {
 				System.out.println("Wrong number selected!");
 				System.out.print("Enter your choice(1-4): ");
-				userChoice = scanner.nextInt();
+				userChoose = scanner.nextInt();
 				System.out.println("");
 			}
 		}
 		
 		
-		switch (userChoice) {
+		switch (userChoose) {
 		case 1:
 			// All books
 			System.out.println("                   All Books");
@@ -105,7 +68,58 @@ public class Main {
 		default:
 			break;
 		}
+	}
+	
 
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		//ArrayList<Book> books = new ArrayList<>();
+		Library library = new Library();
+		Person person = new Person(0, null);
+		
+		library.addBook(new Book("Go Your Way", "Emmanuel Dotse", 123456789L, true));
+		library.addBook(new Book("Shadows of Tomorrow", "Amelia Clark", 987654321L, true));
+		library.addBook(new Book("The Last Horizon", "Daniel Stone", 192837465L, false));
+		library.addBook(new Book("Code of Silence", "Sophia Turner", 564738291L, true));
+		library.addBook(new Book("Dreamcatcher’s Path", "Michael Rivers", 837261945L, true));
+		library.addBook(new Book("Echoes in Time", "Isabella Hughes", 374829105L, false));
+		library.addBook(new Book("The Hidden Truth", "David Johnson", 918273645L, true));
+		library.addBook(new Book("Beyond the Stars", "Olivia Carter", 746382910L, true));
+		library.addBook(new Book("Winds of Change", "James Bennett", 1029384756L, false));
+		library.addBook(new Book("Whispers in the Dark", "Emma Wilson", 5647382910L, true));
+		library.addBook(new Book("Action alleviates Anxiety", "Emmanuel Dotse", 123489789L, true));
+		
+		
+		
+		
+		System.out.println();
+		System.out.println("Welcome to the Library!");
+		System.out.println("------------------------");
+		System.out.println("");
+		System.out.println("1. View all books");
+		System.out.println("2. View available books");
+		System.out.println("3. View borrowed books");
+		System.out.println("4. Borrow a book");
+		System.out.println("5. Return a book");
+		System.out.println("6. View my borrowd books");
+		System.out.println();
+		
+		
+
+		
+		//Read user input
+        
+		Scanner scanner =  new Scanner(System.in);
+		System.out.print("Enter your choice: ");
+	    int userChoose = scanner.nextInt();
+		System.out.println("");
+
+		libraryMenu(userChoose, library, person, scanner);
+		
+		scanner.close();
+
+    }
+}
 		
 
 		
@@ -150,5 +164,3 @@ public class Main {
 		 * System.out.println(book.getTitle()); } }
 		 */
 
-}
-}

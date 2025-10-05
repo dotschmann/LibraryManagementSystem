@@ -39,7 +39,7 @@ public class Person {
 	
 	public void borrowedBook(List<Book> list) {
 		for (Book book : list) {
-			if (book.isAvailable() == false) { // unavailable - false
+			if (!book.isAvailable()) { // unavailable - false
 				System.out.println(book.getTitle() + " by " + book.getAuthor() + " is not available");
 			} else {
 				borrowedBooks.add(book);
@@ -50,8 +50,12 @@ public class Person {
 	
 	public void printBorrowedBooks() {	
 		System.out.println(getUserID() + " has borrowed:");
+		if (borrowedBooks.isEmpty()) {
+			System.out.println("No books borrowed yet");
+			return;
+		}
 		for (Book book : borrowedBooks) {
-			System.out.println("- " + book.getTitle());
+				System.out.println("- " + book.getTitle());	
 		}
 	}
 
