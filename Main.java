@@ -40,7 +40,7 @@ public class Main {
 			switch (userChoose) {
 			case 1:
 				// All books
-				System.out.println("                   All Books");
+				System.out.println("                   All Books()");
 				System.out.println("--------------------------------------------------------");
 				library.printAllBooks(library.getAllBooks());
 				break;
@@ -50,7 +50,6 @@ public class Main {
 				System.out.println("--------------------------------------------------------");
 				//library.printAvailableOrBorrowedBooks(library.getAvailableBooks());
 				library.printAvailableOrBorrowedBooks(library.getBooksAvailability(true));
-				
 				break;
 			case 3:
 				// Borrowed books
@@ -74,11 +73,19 @@ public class Main {
 				break;
 			case 5:
 				// Return a book
-				
+				System.out.print("Enter your ID: ");
+				userID = scanner.nextInt();
+				System.out.print("Enter ISBN of the book: ");
+				isbn = scanner.nextLong();
+				library.printReturnedBookByISBN(library.getBookNameByISBN(isbn));
+				person.returnedBook(library.getBookNameByISBN(isbn));
+				person.setUserID(userID);
+				person.printReturnedBooks();			
 				break;
+				
 			case 6:
 				//View my borrowed books
-				
+				person.printBorrowedBooksOnly();
 				break;
 			case 7:
 					//Exiting the menu
@@ -166,4 +173,5 @@ public class Main {
 		 * (book.getAuthor().equalsIgnoreCase(targetAuthor)) {
 		 * System.out.println(book.getTitle()); } }
 		 */
+
 

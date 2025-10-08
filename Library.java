@@ -78,6 +78,12 @@ class Library {
 			
 	   }
 	}
+	public void printReturnedBookByISBN(List<Book> bookList) {
+		for (Book book : bookList) {
+			System.out.println("Book " + "\"" + book.getTitle() + "\" return successfully");			
+			
+	   }
+	}
 	
 
 }

@@ -7,11 +7,14 @@ public class Person {
 	private long userID;
 	private String userName;
 	private List<Book> borrowedBooks;
-	
+	private List<Book> returnedBooks;
+
 	public Person(long userID, String userName) {
 		this.userID = userID;
 		this.userName = userName;
 		this.borrowedBooks = new ArrayList<>();
+		this.returnedBooks = new ArrayList<>();
+
 	}
 
 	public long getUserID() {
@@ -33,6 +36,10 @@ public class Person {
 	public List<Book> getBorrowedBooks() {	
 		return borrowedBooks;
 	}
+
+	public List<Book> getReturnedBooks() {	
+		return returnedBooks;
+	}
 	
 	
 	//borrowd a book
@@ -47,6 +54,20 @@ public class Person {
 			}
 		}
 	}
+
+
+
+	public void returnedBook(List<Book> list) {
+		for (Book book : list) {
+			if (book.isAvailable()) { // available - true
+				System.out.println(book.getTitle() + " by " + book.getAuthor() + " is available");
+			} else {
+				borrowedBooks.remove(book);
+				returnedBooks.add(book);
+				book.isAvailable(true);			// set tp false to make it unavailable
+			}
+		}
+	}
 	
 	public void printBorrowedBooks() {	
 		System.out.println(getUserID() + " has borrowed:");
@@ -56,6 +77,26 @@ public class Person {
 		}
 		for (Book book : borrowedBooks) {
 				System.out.println("- " + book.getTitle());	
+		}
+	}
+	public void printReturnedBooks() {	
+		System.out.println(getUserID() + " has returned:");
+		if (returnedBooks.isEmpty()) {
+			System.out.println("All books have been returned");
+			return;
+		}
+		for (Book book : returnedBooks) {
+				System.out.println("- " + book.getTitle());	
+		}
+	}
+
+	public void printBorrowedBooksOnly() {
+		if (borrowedBooks.isEmpty()) {
+			System.out.println("No book has been boorrowed");
+		} else {
+			for (Book book : borrowedBooks) {
+				System.out.println("- " + book.getTitle());	
+			}
 		}
 	}
 
