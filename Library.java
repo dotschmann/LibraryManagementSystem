@@ -65,9 +65,13 @@ class Library {
 	
 	public void printAvailableOrBorrowedBooks(List<Book> bookList) {
 		int i = 1;
-		for (Book book : bookList) {
-				System.out.println(i + ". " + book.getTitle() + " by " + book.getAuthor() + " (ISBN: " + book.getIsbn() + ")");			
-				i++;
+		if (bookList.isEmpty()) {
+			System.out.println("No Book borrowed yet!");
+		} else {			
+			for (Book book : bookList) {
+					System.out.println(i + ". " + book.getTitle() + " by " + book.getAuthor() + " (ISBN: " + book.getIsbn() + ")");			
+					i++;
+			}
 		}
 
 	}

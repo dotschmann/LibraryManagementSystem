@@ -1,13 +1,15 @@
 //import java.util.ArrayList;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.List;
 
 public class Main {
 
 
 
 
-	public static void libraryMenu(Library library, Person person, Scanner scanner) {
+	public static void libraryMenu(List<Person> people,Library library, Person person, Scanner scanner) {
         int userChoose;
 		boolean running = true;
 
@@ -17,6 +19,7 @@ public class Main {
 			System.out.println();
 			System.out.println("Welcome to the Library!");
 			System.out.println("");
+			System.out.println("0.Register as a new user");
 			System.out.println("1. View all books");
 			System.out.println("2. View available books");
 			System.out.println("3. View borrowed books");
@@ -31,13 +34,25 @@ public class Main {
 			userChoose = scanner.nextInt();
 			System.out.println();
 			
-			if (userChoose < 1 || userChoose > 7) {
+			if (userChoose < 0 || userChoose > 7) {
 				System.out.print("Wrong number selected! ");
 				System.out.println("Enter a number between(1-7): ");
 			}
 		
 		
 			switch (userChoose) {
+			case 0:
+				// All books
+				System.out.println("                   Reigster()");
+				System.out.println("--------------------------------------------------------");
+				System.out.print("Enter new User Id: ");
+				long id = scanner.nextLong();
+				scanner.nextLine();
+				System.out.print("Enter your name: ");
+				String name = scanner.nextLine();
+				people.add(new Person(id, name));
+				System.out.println("User registered successfully");
+				break;
 			case 1:
 				// All books
 				System.out.println("                   All Books()");
@@ -106,23 +121,25 @@ public class Main {
 		Library library = new Library();
 		Person person = new Person(0, null);
 		Scanner scanner =  new Scanner(System.in);
+		List<Person> people = new ArrayList<>();
 		
 		library.addBook(new Book("Go Your Way", "Emmanuel Dotse", 123456789L, true));
 		library.addBook(new Book("Shadows of Tomorrow", "Amelia Clark", 987654321L, true));
-		library.addBook(new Book("The Last Horizon", "Daniel Stone", 192837465L, false));
+		library.addBook(new Book("The Last Horizon", "Daniel Stone", 192837465L, true));
 		library.addBook(new Book("Code of Silence", "Sophia Turner", 564738291L, true));
 		library.addBook(new Book("Dreamcatcher’s Path", "Michael Rivers", 837261945L, true));
-		library.addBook(new Book("Echoes in Time", "Isabella Hughes", 374829105L, false));
+		library.addBook(new Book("Echoes in Time", "Isabella Hughes", 374829105L, true));
 		library.addBook(new Book("The Hidden Truth", "David Johnson", 918273645L, true));
 		library.addBook(new Book("Beyond the Stars", "Olivia Carter", 746382910L, true));
-		library.addBook(new Book("Winds of Change", "James Bennett", 1029384756L, false));
+		library.addBook(new Book("Winds of Change", "James Bennett", 1029384756L, true));
 		library.addBook(new Book("Whispers in the Dark", "Emma Wilson", 5647382910L, true));
 		library.addBook(new Book("Action alleviates Anxiety", "Emmanuel Dotse", 123489789L, true));
 		
 		
 			
 			
-		libraryMenu(library, person, scanner);
+		libraryMenu(people, library, person, scanner);
+
 	
 
 			

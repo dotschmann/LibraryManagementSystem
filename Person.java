@@ -18,19 +18,19 @@ public class Person {
 	}
 
 	public long getUserID() {
-		return userID;
+		return userID; 
 	}
 
 	public void setUserID(long userID) {
-		this.userID = userID;
+		this.userID = userID; 
 	}
 
 	public String getUserName() {
-		return userName;
+		return userName; 
 	}
 
 	public void setUserName(String userName) {
-		this.userName = userName;
+		this.userName = userName; 
 	}
 	
 	public List<Book> getBorrowedBooks() {	
