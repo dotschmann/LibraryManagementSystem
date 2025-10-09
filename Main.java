@@ -85,6 +85,11 @@ public class Main {
 				long isbn;
 				System.out.print("Enter your ID: ");
 				userID = scanner.nextInt();
+				Person borrowPerson = people.stream().filter(p -> p.getUserID() == userID).findFirst().orElse(null);
+				if (borrowPerson == null) {
+					System.out.println("User not found! Please register first");
+					break;
+				} 
 				System.out.print("Enter ISBN of the book: ");
 				isbn = scanner.nextLong();
 				library.printBookByISBN(library.getBookNameByISBN(isbn));
