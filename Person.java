@@ -68,6 +68,13 @@ public class Person {
 			}
 		}
 	}
+
+	public void registeredUsers(List<Person> list) {
+		for (Person person : list) {
+				System.out.println(person.userID + " - " + person.userName);
+			
+		}
+	}
 	
 	public void printBorrowedBooks() {	
 		System.out.println(getUserID() + " has borrowed:");

@@ -19,14 +19,15 @@ public class Main {
 			System.out.println();
 			System.out.println("Welcome to the Library!");
 			System.out.println("");
-			System.out.println("0.Register as a new user");
+			System.out.println("0. Register as a new user");
 			System.out.println("1. View all books");
 			System.out.println("2. View available books");
 			System.out.println("3. View borrowed books");
 			System.out.println("4. Borrow a book");
 			System.out.println("5. Return a book");
 			System.out.println("6. View my borrowd books");
-			System.out.println("7. Exit");
+			System.out.println("7. View all registered users");
+			System.out.println("8. Exit");
 			System.out.println();	
 		
 			//Read user input			
@@ -34,7 +35,7 @@ public class Main {
 			userChoose = scanner.nextInt();
 			System.out.println();
 			
-			if (userChoose < 0 || userChoose > 7) {
+			if (userChoose < 0 || userChoose > 8) {
 				System.out.print("Wrong number selected! ");
 				System.out.println("Enter a number between(1-7): ");
 			}
@@ -108,6 +109,13 @@ public class Main {
 				person.printBorrowedBooksOnly();
 				break;
 			case 7:
+				//View all registered users
+				System.out.println("                List of registered Users");
+				System.out.println("--------------------------------------------------------");
+				person.registeredUsers(people);	
+				
+				break;
+			case 8:
 					//Exiting the menu
 					System.out.println("Exiting library menu...");
 					running = false; //exit from loop
