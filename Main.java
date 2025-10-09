@@ -50,8 +50,13 @@ public class Main {
 				scanner.nextLine();
 				System.out.print("Enter your name: ");
 				String name = scanner.nextLine();
-				people.add(new Person(id, name));
-				System.out.println("User registered successfully");
+				boolean exist = people.stream().anyMatch(pn -> pn.getUserID() == id);
+				if (exist) {
+					System.out.println("User with this ID already exists!");
+				} else {	
+					people.add(new Person(id, name));
+					System.out.println("User registered successfully");
+				}
 				break;
 			case 1:
 				// All books
