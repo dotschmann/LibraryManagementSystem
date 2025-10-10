@@ -68,13 +68,6 @@ public class Person {
 			}
 		}
 	}
-
-	public void registeredUsers(List<Person> list) {
-		for (Person person : list) {
-				System.out.println(person.userID + " - " + person.userName);
-			
-		}
-	}
 	
 	public void printBorrowedBooks() {	
 		System.out.println(getUserID() + " has borrowed:");
@@ -99,13 +92,42 @@ public class Person {
 
 	public void printBorrowedBooksOnly() {
 		if (borrowedBooks.isEmpty()) {
-			System.out.println("No book has been boorrowed");
+			System.out.println("No book has been borrowed");
 		} else {
 			for (Book book : borrowedBooks) {
 				System.out.println("- " + book.getTitle());	
 			}
 		}
 	}
+
+    public void registeredUsers(List<Person> people) {
+        // TODO Auto-generated method stub
+		if (people.isEmpty()) {
+			System.out.println("No registered users yet");
+		} else {
+			for (Person person : people) {
+				System.out.println(person.userID + " - " + person.userName);
+			}
+		}
+	}
+
+	public void myBorrowedBook(long userID, List<Person> people) {
+		boolean existID = people.stream().anyMatch(id -> id.getUserID() == userID);
+		Person foundID = people.stream().filter(p -> p.getUserID() == userID).findFirst().orElse(null);
+		if (existID) {
+			if (foundID.getBorrowedBooks().isEmpty()) {
+				System.out.println(userID + " has not borrowed any book yet!");
+				return;
+			} else {
+				for (Book book : foundID.getBorrowedBooks()) {
+					System.out.println(" - " + book.getTitle());
+				}
+			}
+		} else {
+			System.out.println("You have no borrowed books!");
+		}
+	}
+    
 
 
 

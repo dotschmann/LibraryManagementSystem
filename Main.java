@@ -16,9 +16,10 @@ public class Main {
 		while (running) {
 
 			//Menu Display
+			System.out.println("-----------------------------------------");
+			System.out.println("         Welcome to the Library!");
+			System.out.println("-----------------------------------------");
 			System.out.println();
-			System.out.println("Welcome to the Library!");
-			System.out.println("");
 			System.out.println("0. Register as a new user");
 			System.out.println("1. View all books");
 			System.out.println("2. View available books");
@@ -29,33 +30,33 @@ public class Main {
 			System.out.println("7. View all registered users");
 			System.out.println("8. Exit");
 			System.out.println();	
-		
+
 			//Read user input			
 			System.out.print("Enter your choice: ");
 			userChoose = scanner.nextInt();
 			System.out.println();
-			
+
 			if (userChoose < 0 || userChoose > 8) {
 				System.out.print("Wrong number selected! ");
 				System.out.println("Enter a number between(1-7): ");
 			}
-		
-		
+
+
 			switch (userChoose) {
 			case 0:
 				// All books
-				System.out.println("                   Reigster()");
+				System.out.println("                   Register");
 				System.out.println("--------------------------------------------------------");
 				System.out.print("Enter new User Id: ");
-				long id = scanner.nextLong();
+				long userID = scanner.nextLong();
 				scanner.nextLine();
 				System.out.print("Enter your name: ");
 				String name = scanner.nextLine();
-				boolean exist = people.stream().anyMatch(pn -> pn.getUserID() == id);
+				boolean exist = people.stream().anyMatch(pn -> pn.getUserID() == userID);
 				if (exist) {
 					System.out.println("User with this ID already exists!");
 				} else {	
-					people.add(new Person(id, name));
+					people.add(new Person(userID, name));
 					System.out.println("User registered successfully");
 				}
 				break;
@@ -81,26 +82,34 @@ public class Main {
 				break;
 			case 4:
 				//Borrow a book
-				int userID;
 				long isbn;
 				System.out.print("Enter your ID: ");
-				userID = scanner.nextInt();
-				Person borrowPerson = people.stream().filter(p -> p.getUserID() == userID).findFirst().orElse(null);
+				userID = scanner.nextLong();
+				Person borrowPerson = people.stream().filter(p -> p.getUserID() == userID)
+					.findFirst()
+					.orElse(null);
 				if (borrowPerson == null) {
 					System.out.println("User not found! Please register first");
 					break;
-				} 
+				}
 				System.out.print("Enter ISBN of the book: ");
 				isbn = scanner.nextLong();
-				library.printBookByISBN(library.getBookNameByISBN(isbn));
+				List<Book> bookToBorrow = library.getBookNameByISBN(isbn);
+				if (bookToBorrow.isEmpty()) {
+					System.out.println("Book not found!");
+					break;
+				}
+				library.printBookByISBN(bookToBorrow);
+				borrowPerson.borrowedBook(bookToBorrow);
+				borrowPerson.printBorrowedBooks();
 				person.borrowedBook(library.getBookNameByISBN(isbn));
-				person.setUserID(userID);
-				person.printBorrowedBooks();			
+				//person.setUserID(userID);
+				//person.printBorrowedBooks();			
 				break;
 			case 5:
 				// Return a book
 				System.out.print("Enter your ID: ");
-				userID = scanner.nextInt();
+				userID = scanner.nextLong();
 				System.out.print("Enter ISBN of the book: ");
 				isbn = scanner.nextLong();
 				library.printReturnedBookByISBN(library.getBookNameByISBN(isbn));
@@ -108,10 +117,12 @@ public class Main {
 				person.setUserID(userID);
 				person.printReturnedBooks();			
 				break;
-				
+
 			case 6:
 				//View my borrowed books
-				person.printBorrowedBooksOnly();
+				System.out.print("Enter your ID: ");
+				userID = scanner.nextLong();
+				person.myBorrowedBook(userID, people);
 				break;
 			case 7:
 				//View all registered users
@@ -124,14 +135,14 @@ public class Main {
 					//Exiting the menu
 					System.out.println("Exiting library menu...");
 					running = false; //exit from loop
-				
+
 				break;
 
 			}
 
 	    }
 	}
-	
+
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
@@ -140,7 +151,7 @@ public class Main {
 		Person person = new Person(0, null);
 		Scanner scanner =  new Scanner(System.in);
 		List<Person> people = new ArrayList<>();
-		
+
 		library.addBook(new Book("Go Your Way", "Emmanuel Dotse", 123456789L, true));
 		library.addBook(new Book("Shadows of Tomorrow", "Amelia Clark", 987654321L, true));
 		library.addBook(new Book("The Last Horizon", "Daniel Stone", 192837465L, true));
@@ -152,15 +163,15 @@ public class Main {
 		library.addBook(new Book("Winds of Change", "James Bennett", 1029384756L, true));
 		library.addBook(new Book("Whispers in the Dark", "Emma Wilson", 5647382910L, true));
 		library.addBook(new Book("Action alleviates Anxiety", "Emmanuel Dotse", 123489789L, true));
-		
-		
-			
-			
+
+
+
+
 		libraryMenu(people, library, person, scanner);
 
-	
 
-			
+
+
 		scanner.close();
 
     }
