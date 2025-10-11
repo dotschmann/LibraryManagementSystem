@@ -156,10 +156,10 @@ public class Main {
 				String authorName = scanner.nextLine();
 				
 				
-				System.out.println("                " + authorName + "'s Books:");
+				System.out.println("                \"" + authorName + "\" search results: ");
 				System.out.println("--------------------------------------------------------");
-				//library.getBooksByAuthor(authorName);
-				library.printAuthorBooks(library.getBooksByAuthor(authorName));
+				String searchAuthor = authorName.toLowerCase();
+				library.printAuthorBooks(library.getBooksByMatchingAuthor(searchAuthor));
 				break;
 			case 9:
 					//Exiting the menu

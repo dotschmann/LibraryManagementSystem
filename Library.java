@@ -36,9 +36,9 @@ class Library {
 				.collect(Collectors.toList());
 	}
 	
-	public List<Book> getBooksByAuthor(String author) {
+	public List<Book> getBooksByMatchingAuthor(String author) {
 		return books.stream()
-				.filter(book -> book.getAuthor().equalsIgnoreCase(author))
+				.filter(book -> book.getAuthor().toLowerCase().contains(author))
 				.collect(Collectors.toList());
 	}
 	
@@ -83,12 +83,12 @@ class Library {
 		} else {
 			for (Book book : bookListofAuthor) {
 				String status;
-				if(book.isAvailable()) {
+				if (book.isAvailable()) {
 					status = "Available";
 				} else {
 					status = "Borrowed";
 				}
-				System.out.println(i + ". " + book.getTitle() + " [" + status +"]");
+				System.out.println(i + ". " + book.getAuthor() + ": " + book.getTitle() + " [" + status +"]");
 				i++;
 			}
 		}
