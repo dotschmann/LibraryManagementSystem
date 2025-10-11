@@ -18,6 +18,7 @@ public class Main {
 		while (running) {
 
 			//Menu Display
+			System.out.println();	
 			System.out.println("-----------------------------------------");
 			System.out.println("         Welcome to the Library!");
 			System.out.println("-----------------------------------------");
@@ -30,7 +31,9 @@ public class Main {
 			System.out.println("5. Return a book");
 			System.out.println("6. View my borrowd books");
 			System.out.println("7. View all registered users");
-			System.out.println("8. Exit");
+			System.out.println("8. Find Author's books");
+
+			System.out.println("9. Exit");
 			System.out.println();	
 
 			//Read user input			
@@ -38,7 +41,7 @@ public class Main {
 			userChoose = scanner.nextInt();
 			System.out.println();
 
-			if (userChoose < 0 || userChoose > 8) {
+			if (userChoose < 0 || userChoose > 9) {
 				System.out.print("Wrong number selected! ");
 				System.out.println("Enter a number between(1-7): ");
 			}
@@ -147,6 +150,18 @@ public class Main {
 				
 				break;
 			case 8:
+				//View all Author's books
+				System.out.print("Enter Author's name: ");
+				scanner.nextLine();
+				String authorName = scanner.nextLine();
+				
+				
+				System.out.println("                " + authorName + "'s Books:");
+				System.out.println("--------------------------------------------------------");
+				//library.getBooksByAuthor(authorName);
+				library.printAuthorBooks(library.getBooksByAuthor(authorName));
+				break;
+			case 9:
 					//Exiting the menu
 					System.out.println("Exiting library menu...");
 					running = false; //exit from loop

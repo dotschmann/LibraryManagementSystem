@@ -75,6 +75,24 @@ class Library {
 		}
 
 	}
+
+	public void printAuthorBooks(List<Book> bookListofAuthor) {
+		int i = 1;
+		if (bookListofAuthor.isEmpty()) {
+			System.out.println("Author is not on our List");
+		} else {
+			for (Book book : bookListofAuthor) {
+				String status;
+				if(book.isAvailable()) {
+					status = "Available";
+				} else {
+					status = "Borrowed";
+				}
+				System.out.println(i + ". " + book.getTitle() + " [" + status +"]");
+				i++;
+			}
+		}
+	}
 	
 	// public void printBookByISBN(List<Book> bookList) {
 	// 	for (Book book : bookList) {
