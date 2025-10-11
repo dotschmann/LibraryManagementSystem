@@ -76,18 +76,18 @@ class Library {
 
 	}
 	
-	public void printBookByISBN(List<Book> bookList) {
-		for (Book book : bookList) {
-			System.out.println("Book " + "\"" + book.getTitle() + "\" borrowed successfully");			
+	// public void printBookByISBN(List<Book> bookList) {
+	// 	for (Book book : bookList) {
+	// 		System.out.println("Book " + "\"" + book.getTitle() + "\" borrowed successfully");			
 			
-	   }
-	}
-	public void printReturnedBookByISBN(List<Book> bookList) {
-		for (Book book : bookList) {
-			System.out.println("Book " + "\"" + book.getTitle() + "\" return successfully");			
+	//    }
+	// }
+	// public void printReturnedBookByISBN(List<Book> bookList) {
+	// 	for (Book book : bookList) {
+	// 		System.out.println("Book " + "\"" + book.getTitle() + "\" return successfully");			
 			
-	   }
-	}
+	//    }
+	// }
 	
 
 }

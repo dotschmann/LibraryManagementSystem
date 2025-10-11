@@ -6,7 +6,9 @@ import java.util.List;
 
 public class Main {
 
+    public static void borrowdAndReturned() {
 
+	}
 
 
 	public static void libraryMenu(List<Person> people,Library library, Person person, Scanner scanner) {
@@ -85,7 +87,7 @@ public class Main {
 				long isbn;
 				System.out.print("Enter your ID: ");
 				userID = scanner.nextLong();
-				Person borrowPerson = people.stream().filter(p -> p.getUserID() == userID)
+				Person borrowPerson = people.stream().filter(b -> b.getUserID() == userID)
 					.findFirst()
 					.orElse(null);
 				if (borrowPerson == null) {
@@ -99,10 +101,10 @@ public class Main {
 					System.out.println("Book not found!");
 					break;
 				}
-				library.printBookByISBN(bookToBorrow);
+				// library.printBookByISBN(bookToBorrow);
 				borrowPerson.borrowedBook(bookToBorrow);
 				borrowPerson.printBorrowedBooks();
-				person.borrowedBook(library.getBookNameByISBN(isbn));
+				//person.borrowedBook(library.getBookNameByISBN(isbn));
 				//person.setUserID(userID);
 				//person.printBorrowedBooks();			
 				break;
@@ -110,12 +112,25 @@ public class Main {
 				// Return a book
 				System.out.print("Enter your ID: ");
 				userID = scanner.nextLong();
+				Person returnPerson = people.stream().filter(r -> r.getUserID() == userID)
+					.findFirst()
+					.orElse(null);
+				if (returnPerson == null) {
+					System.out.println("User not found! You may not a registered!");
+					break;
+				}
 				System.out.print("Enter ISBN of the book: ");
 				isbn = scanner.nextLong();
-				library.printReturnedBookByISBN(library.getBookNameByISBN(isbn));
-				person.returnedBook(library.getBookNameByISBN(isbn));
-				person.setUserID(userID);
-				person.printReturnedBooks();			
+				List<Book> bookToReturn = library.getBookNameByISBN(isbn);
+				if (bookToReturn.isEmpty()) {
+					System.out.println("Not a registered library book. Report error!");
+					break;
+				}
+				returnPerson.returnedBook(bookToReturn);
+				returnPerson.printReturnedBooks();			
+				// library.printReturnedBookByISBN(bookToReturn);
+				// person.returnedBook(library.getBookNameByISBN(isbn));
+				// person.setUserID(userID);
 				break;
 
 			case 6:

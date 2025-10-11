@@ -47,7 +47,7 @@ public class Person {
 	public void borrowedBook(List<Book> list) {
 		for (Book book : list) {
 			if (!book.isAvailable()) { // unavailable - false
-				System.out.println(book.getTitle() + " by " + book.getAuthor() + " is not available");
+				System.out.println(book.getTitle() + " by " + book.getAuthor() + " is not available now!");
 			} else {
 				borrowedBooks.add(book);
 				book.isAvailable(false);			// set tp false to make it unavailable
@@ -60,7 +60,7 @@ public class Person {
 	public void returnedBook(List<Book> list) {
 		for (Book book : list) {
 			if (book.isAvailable()) { // available - true
-				System.out.println(book.getTitle() + " by " + book.getAuthor() + " is available");
+				System.out.println(book.getTitle() + " by " + book.getAuthor() + " can now be borrowed!");
 			} else {
 				borrowedBooks.remove(book);
 				returnedBooks.add(book);
@@ -111,17 +111,27 @@ public class Person {
 		}
 	}
 
-	public void myBorrowedBook(long userID, List<Person> people) {
-		boolean existID = people.stream().anyMatch(id -> id.getUserID() == userID);
-		Person foundID = people.stream().filter(p -> p.getUserID() == userID).findFirst().orElse(null);
+	public void myBorrowedBook(long borrowerID, List<Person> people) {
+		boolean existID = people.stream().anyMatch(id -> id.getUserID() == borrowerID);
+		Person foundID = people.stream().filter(p -> p.getUserID() == borrowerID).findFirst().orElse(null);
+		if(foundID == null) {
+			System.out.println("User not found! Please register first.");
+			return;
+		}
 		if (existID) {
 			if (foundID.getBorrowedBooks().isEmpty()) {
-				System.out.println(userID + " has not borrowed any book yet!");
+				System.out.println(foundID.getUserID() + " has not borrowed any book yet!");
+				System.out.println();
+				System.out.println();
 				return;
 			} else {
+				System.out.println("    " + foundID.getUserName() + " borrowed Book(s): ");
+				System.out.println("-----------------------------------------");
 				for (Book book : foundID.getBorrowedBooks()) {
 					System.out.println(" - " + book.getTitle());
 				}
+				System.out.println();
+				System.out.println();
 			}
 		} else {
 			System.out.println("You have no borrowed books!");
