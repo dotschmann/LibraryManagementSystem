@@ -11,7 +11,7 @@ public class Main {
 	}
 
 
-	public static void libraryMenu(List<Person> people,Library library, Person person, Scanner scanner) {
+	public static void libraryMenu(List<Person> people,Library library, Person person, Scanner scanner, LibraryService libraryService) {
         int userChoose;
 		boolean running = true;
 
@@ -90,9 +90,11 @@ public class Main {
 				long isbn;
 				System.out.print("Enter your ID: ");
 				userID = scanner.nextLong();
-				Person borrowPerson = people.stream().filter(b -> b.getUserID() == userID)
-					.findFirst()
-					.orElse(null);
+				// Person borrowPerson = people.stream().filter(b -> b.getUserID() == userID)
+				// 	.findFirst()
+				// 	.orElse(null);
+
+				Person borrowPerson = libraryService.findUserById(userID);
 				if (borrowPerson == null) {
 					System.out.println("User not found! Please register first");
 					break;
@@ -115,9 +117,7 @@ public class Main {
 				// Return a book
 				System.out.print("Enter your ID: ");
 				userID = scanner.nextLong();
-				Person returnPerson = people.stream().filter(r -> r.getUserID() == userID)
-					.findFirst()
-					.orElse(null);
+				Person returnPerson = libraryService.findUserById(userID);
 				if (returnPerson == null) {
 					System.out.println("User not found! You may not a registered!");
 					break;
@@ -162,9 +162,9 @@ public class Main {
 				library.printAuthorBooks(library.getBooksByMatchingAuthor(searchAuthor));
 				break;
 			case 9:
-					//Exiting the menu
-					System.out.println("Exiting library menu...");
-					running = false; //exit from loop
+				//Exiting the menu
+				System.out.println("Exiting library menu...");
+				running = false; //exit from loop
 
 				break;
 
@@ -181,6 +181,7 @@ public class Main {
 		Person person = new Person(0, null);
 		Scanner scanner =  new Scanner(System.in);
 		List<Person> people = new ArrayList<>();
+		LibraryService libraryService = new LibraryService(people);
 
 		library.addBook(new Book("Go Your Way", "Emmanuel Dotse", 123456789L, true));
 		library.addBook(new Book("Shadows of Tomorrow", "Amelia Clark", 987654321L, true));
@@ -197,14 +198,14 @@ public class Main {
 
 
 
-		libraryMenu(people, library, person, scanner);
+		libraryMenu(people, library, person, scanner, libraryService);
 
 
 
 
 		scanner.close();
 
-    }
+  }
 }
 		
 
