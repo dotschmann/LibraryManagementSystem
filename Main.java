@@ -6,30 +6,15 @@ import java.util.List;
 
 public class Main {
 
-	public static void libraryMenu(Scanner scanner, LibraryService libraryService) {
+	public static void libraryMenu(Scanner scanner, LibraryService libraryService, LibraryUI libraryUI) {
         int userChoose;
 		boolean running = true;
 
 		while (running) {
 
 			//Menu Display
-			System.out.println();	
-			System.out.println("-----------------------------------------");
-			System.out.println("         Welcome to the Library!");
-			System.out.println("-----------------------------------------");
-			System.out.println();
-			System.out.println("0. Register as a new user");
-			System.out.println("1. View all books");
-			System.out.println("2. View available books");
-			System.out.println("3. View borrowed books");
-			System.out.println("4. Borrow a book");
-			System.out.println("5. Return a book");
-			System.out.println("6. View my borrowd books");
-			System.out.println("7. View all registered users");
-			System.out.println("8. Find Author's books");
+			libraryUI.menuDisplay();
 
-			System.out.println("9. Exit");
-			System.out.println();	
 
 			//Read user input			
 			System.out.print("Enter your choice: ");
@@ -138,6 +123,7 @@ public class Main {
 		Scanner scanner =  new Scanner(System.in);
 		List<Person> people = new ArrayList<>();
 		LibraryService libraryService = new LibraryService(people,library, person);
+		LibraryUI libraryUI = new LibraryUI();
 
 		library.addBook(new Book("Go Your Way", "Emmanuel Dotse", 123456789L, true));
 		library.addBook(new Book("Shadows of Tomorrow", "Amelia Clark", 987654321L, true));
@@ -154,7 +140,7 @@ public class Main {
 
 
 
-		libraryMenu(scanner, libraryService);
+		libraryMenu(scanner, libraryService, libraryUI);
 
 
 
