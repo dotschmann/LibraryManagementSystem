@@ -111,32 +111,7 @@ public class Person {
 		}
 	}
 
-	public void myBorrowedBook(long borrowerID, List<Person> people) {
-		boolean existID = people.stream().anyMatch(id -> id.getUserID() == borrowerID);
-		Person foundID = people.stream().filter(p -> p.getUserID() == borrowerID).findFirst().orElse(null);
-		if(foundID == null) {
-			System.out.println("User not found! Please register first.");
-			return;
-		}
-		if (existID) {
-			if (foundID.getBorrowedBooks().isEmpty()) {
-				System.out.println(foundID.getUserID() + " has not borrowed any book yet!");
-				System.out.println();
-				System.out.println();
-				return;
-			} else {
-				System.out.println("    " + foundID.getUserName() + " borrowed Book(s): ");
-				System.out.println("-----------------------------------------");
-				for (Book book : foundID.getBorrowedBooks()) {
-					System.out.println(" - " + book.getTitle());
-				}
-				System.out.println();
-				System.out.println();
-			}
-		} else {
-			System.out.println("You have no borrowed books!");
-		}
-	}
+
     
 
 

@@ -6,12 +6,7 @@ import java.util.List;
 
 public class Main {
 
-    public static void borrowdAndReturned() {
-
-	}
-
-
-	public static void libraryMenu(List<Person> people,Library library, Person person, Scanner scanner, LibraryService libraryService) {
+	public static void libraryMenu(Scanner scanner, LibraryService libraryService) {
         int userChoose;
 		boolean running = true;
 
@@ -63,84 +58,51 @@ public class Main {
 				// All books
 				System.out.println("                   All Books()");
 				System.out.println("--------------------------------------------------------");
-				library.printAllBooks(library.getAllBooks());
+				libraryService.printAllBooks(libraryService.getAllBooks());
 				break;
 			case 2:
 				//a Available books
 				System.out.println("                   Available Books");
 				System.out.println("--------------------------------------------------------");
 				//library.printAvailableOrBorrowedBooks(library.getAvailableBooks());
-				library.printAvailableOrBorrowedBooks(library.getBooksAvailability(true));
+				libraryService.printAvailableOrBorrowedBooks(libraryService.getBooksAvailability(true));
 				break;
 			case 3:
 				// Borrowed books
 				System.out.println("                   Borrowed Books");
 				System.out.println("--------------------------------------------------------");
 				//library.printAvailableOrBorrowedBooks(library.getBorrowedBooks());
-				library.printAvailableOrBorrowedBooks(library.getBooksAvailability(false));
+				libraryService.printAvailableOrBorrowedBooks(libraryService.getBooksAvailability(false));
 				break;
 			case 4:
 				//Borrow a book
 				long isbn;
 				System.out.print("Enter your ID: ");
 				userID = scanner.nextLong();
-				// Person borrowPerson = people.stream().filter(b -> b.getUserID() == userID)
-				// 	.findFirst()
-				// 	.orElse(null);
-
-				Person borrowPerson = libraryService.findUserById(userID);
-				if (borrowPerson == null) {
-					System.out.println("User not found! Please register first");
-					break;
-				}
 				System.out.print("Enter ISBN of the book: ");
 				isbn = scanner.nextLong();
-				List<Book> bookToBorrow = library.getBookNameByISBN(isbn);
-				if (bookToBorrow.isEmpty()) {
-					System.out.println("Book not found!");
-					break;
-				}
-				// library.printBookByISBN(bookToBorrow);
-				borrowPerson.borrowedBook(bookToBorrow);
-				borrowPerson.printBorrowedBooks();
-				//person.borrowedBook(library.getBookNameByISBN(isbn));
-				//person.setUserID(userID);
-				//person.printBorrowedBooks();			
+				libraryService.borrowBook(userID, isbn);		
 				break;
 			case 5:
 				// Return a book
 				System.out.print("Enter your ID: ");
 				userID = scanner.nextLong();
-				Person returnPerson = libraryService.findUserById(userID);
-				if (returnPerson == null) {
-					System.out.println("User not found! You may not a registered!");
-					break;
-				}
 				System.out.print("Enter ISBN of the book: ");
 				isbn = scanner.nextLong();
-				List<Book> bookToReturn = library.getBookNameByISBN(isbn);
-				if (bookToReturn.isEmpty()) {
-					System.out.println("Not a registered library book. Report error!");
-					break;
-				}
-				returnPerson.returnedBook(bookToReturn);
-				returnPerson.printReturnedBooks();			
-				// library.printReturnedBookByISBN(bookToReturn);
-				// person.returnedBook(library.getBookNameByISBN(isbn));
-				// person.setUserID(userID);
+				libraryService.returnBook(userID, isbn);
 				break;
 
 			case 6:
 				//View my borrowed books
 				System.out.print("Enter your ID: ");
 				userID = scanner.nextLong();
-				person.myBorrowedBook(userID, people);
+				libraryService.myBorrowedBook(userID);
 				break;
 			case 7:
 				//View all registered users
 				System.out.println("                List of registered Users");
 				System.out.println("--------------------------------------------------------");
-				person.registeredUsers(people);	
+				libraryService.listRegisteredUsers();	
 				
 				break;
 			case 8:
@@ -153,7 +115,7 @@ public class Main {
 				System.out.println("                \"" + authorName + "\" search results: ");
 				System.out.println("--------------------------------------------------------");
 				String searchAuthor = authorName.toLowerCase();
-				library.printAuthorBooks(library.getBooksByMatchingAuthor(searchAuthor));
+				libraryService.printAuthorBooks(libraryService.getBooksByMatchingAuthor(searchAuthor));
 				break;
 			case 9:
 				//Exiting the menu
@@ -175,7 +137,7 @@ public class Main {
 		Person person = new Person(0, null);
 		Scanner scanner =  new Scanner(System.in);
 		List<Person> people = new ArrayList<>();
-		LibraryService libraryService = new LibraryService(people);
+		LibraryService libraryService = new LibraryService(people,library, person);
 
 		library.addBook(new Book("Go Your Way", "Emmanuel Dotse", 123456789L, true));
 		library.addBook(new Book("Shadows of Tomorrow", "Amelia Clark", 987654321L, true));
@@ -192,7 +154,7 @@ public class Main {
 
 
 
-		libraryMenu(people, library, person, scanner, libraryService);
+		libraryMenu(scanner, libraryService);
 
 
 
