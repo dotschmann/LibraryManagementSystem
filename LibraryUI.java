@@ -80,6 +80,11 @@ public class LibraryUI {
 					long isbn;
 					System.out.print("Enter your ID: ");
 					userID = scanner.nextLong();
+                    if (!libraryService.doesUserExit(userID)) {
+                        System.out.println("User not found! You are not registered");
+                        break;
+                    }
+
 					System.out.print("Enter ISBN of the book: ");
 					isbn = scanner.nextLong();
 					libraryService.borrowBook(userID, isbn);		
@@ -88,6 +93,11 @@ public class LibraryUI {
 					// Return a book
 					System.out.print("Enter your ID: ");
 					userID = scanner.nextLong();
+                    if (!libraryService.doesUserExit(userID)) {
+                        System.out.println("User not found! You are not registered");
+                        break;
+                    }
+
 					System.out.print("Enter ISBN of the book: ");
 					isbn = scanner.nextLong();
 					libraryService.returnBook(userID, isbn);

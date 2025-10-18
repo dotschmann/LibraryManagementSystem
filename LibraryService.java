@@ -32,11 +32,7 @@ public class LibraryService {
 
     public void borrowBook (long userID, long ISBN) {
         Person borrowPerson = findUserById(userID);
-        if (borrowPerson == null) {
-            System.out.println("User not found! Please register first");
-            return;
-        }
-
+        
         List<Book> bookList = library.getBookNameByISBN(ISBN);
         if(bookList.isEmpty()) {
             System.out.println("Book not found!");
@@ -50,11 +46,7 @@ public class LibraryService {
 
     public void returnBook(long userID, long ISBN) {
         Person returnPerson = findUserById(userID);
-        if (returnPerson == null) {
-            System.out.println("USer not found! You are not registered!");
-            return;
-        }
-        
+
         List<Book> bookList = library.getBookNameByISBN(ISBN);
         if (bookList.isEmpty()) {
             System.out.println("Not a registered library book. Report error!");
@@ -63,6 +55,14 @@ public class LibraryService {
 
         returnPerson.returnedBook(bookList);
         returnPerson.printReturnedBooks();
+    }
+
+    public boolean doesUserExit(long userID) {
+        Person userExist = findUserById(userID);
+        if (userExist == null) { 
+            return false;
+        }
+        return true;
     }
 
     public void printAllBooks(List<Book> bookList) {
