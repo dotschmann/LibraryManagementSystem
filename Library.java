@@ -48,11 +48,6 @@ class Library {
                 .collect(Collectors.toList());
 	}
 	
-
-	
-
-
-
 	
 	// public void printBookByISBN(List<Book> bookList) {
 	// 	for (Book book : bookList) {
@@ -66,6 +61,5 @@ class Library {
 			
 	//    }
 	// }
-	
 
 }

@@ -1,9 +1,5 @@
 
 public class Book {
-
-	/**
-	 * 
-	 */
 	
 	//title
 	private String title;
@@ -64,11 +60,5 @@ public class Book {
 	public String toString() {
 		return "\"" + title + "\" by " + author + " (ISBN: " + isbn + ") - " + (status ? "Available": "Borrowed");
 	}
-	
-	
-	
-	
-	
-
 
 }

@@ -3,7 +3,6 @@ import java.util.List;
 
 public class Person {
 	
-	// create id and name of person who have borrrowed book. the books they have borrowed and the ones they have returned. store user id with name and book borrowed
 	private long userID;
 	private String userName;
 	private List<Book> borrowedBooks;
@@ -109,10 +108,4 @@ public class Person {
 			}
 		}
 	}
-
-
-    
-
-
-
 }
