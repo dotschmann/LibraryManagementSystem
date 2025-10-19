@@ -101,7 +101,6 @@ public class Person {
 	}
 
     public void registeredUsers(List<Person> people) {
-        // TODO Auto-generated method stub
 		if (people.isEmpty()) {
 			System.out.println("No registered users yet");
 		} else {

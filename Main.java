@@ -7,7 +7,7 @@ import java.util.List;
 public class Main {
 
 	public static void libraryMenu(Scanner scanner, LibraryUI libraryUI) {
-        int userChoose;
+        int userChoose; 
 		boolean running = true;
 
 		while (running) {
@@ -21,14 +21,13 @@ public class Main {
 			userChoose = scanner.nextInt();
 			System.out.println();
 
-			libraryUI.userInput(userChoose, running);
+			running = libraryUI.userInput(userChoose);
 
 	    }
 	}
 
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
 		//ArrayList<Book> books = new ArrayList<>();
 		Library library = new Library();
 		Person person = new Person(0, null);
@@ -49,13 +48,7 @@ public class Main {
 		library.addBook(new Book("Whispers in the Dark", "Emma Wilson", 5647382910L, true));
 		library.addBook(new Book("Action alleviates Anxiety", "Emmanuel Dotse", 123489789L, true));
 
-
-
-
 		libraryMenu(scanner, libraryUI);
-
-
-
 
 		scanner.close();
 

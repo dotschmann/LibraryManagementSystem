@@ -36,7 +36,7 @@ public class LibraryUI {
     }
 
 
-    public void userInput(int userChoose, boolean running) {
+    public boolean userInput(int userChoose) {
 			if (userChoose < 0 || userChoose > 9) {
 				System.out.print("Wrong number selected! ");
 				System.out.println("Enter a number between(1-7): ");
@@ -132,12 +132,12 @@ public class LibraryUI {
 					//Exiting the menu
 					System.out.println("Exiting library menu...");
 					//running = false; //exit from loop
-                    System.exit(0);
-            
+                    return false; // loop stops
 
-					break;
+                default: System.out.println("invalid option!");
 
-			}        
+			}     
+            return true;   
 
     }
     
